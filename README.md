@@ -10,7 +10,7 @@ Python functions allowing users to interact with a system model in a familiar to
 elements can allow users to run analyses or even model in Python.
 
 # Classes
-## MMSAdapter(_server_, _ref id_, _project id_)
+## MMSAdapter(_server_, _project id_, _ref id_)
 Initializing a project object allows the user to set the server, reference ID, and project ID
 then run methods on that project.
 

@@ -61,7 +61,7 @@ class MMSAdapter(object):
         return self.elem_api.post_elements(self.project_id, self.ref_id, payload)
 
     def update_element_name(self, element_id, name):
-        target = Element(element_id, name)
+        target = {'id': element_id, 'name': name}
         payload = Elements([target])
         return self.elem_api.post_elements(self.project_id, self.ref_id, payload)
 

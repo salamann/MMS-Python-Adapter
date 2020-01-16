@@ -1,6 +1,6 @@
 package:
     name: mms-python-adapter
-    version: 1.2.4
+    version: versionnumber
 
 source:
     path: .
