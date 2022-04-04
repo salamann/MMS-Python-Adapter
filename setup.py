@@ -17,7 +17,7 @@ setup(
     long_description_content_type="text/markdown",
     packages=find_packages(exclude=["test", "tests"]),
     install_requires=[
-        'mms-python-client<4'
+        'mms-python-client>4'
     ],
     license="Apache 2.0",
     classifiers=(
