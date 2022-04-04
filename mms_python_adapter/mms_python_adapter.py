@@ -1,6 +1,6 @@
 from mms_python_client import ApiClient, Configuration
 from mms_python_client.apis import AuthApi, ElementsApi
-from mms_python_client.models import Element, ElementsRequest
+from mms_python_client.models import Element, ElementsRequest, ElementsResponse
 
 
 class MMSAdapter(object):
@@ -31,13 +31,13 @@ class MMSAdapter(object):
         self.config.api_key.clear()
 
     # depth= -1 same as recurse=true
-    def get_element(self, element_id, depth=0):
-        return self.elem_api.get_element(self.project_id, self.ref_id, element_id, depth=depth)
+    def get_element(self, element_id):
+        return self.elem_api.get_element(self.project_id, self.ref_id, element_id)
 
     def update_element_value(self, element_id, value):
         # hardcoding this because the Element class doesn't commit properly
-        element: Element = self.get_element(element_id)
-        default_value = element['defaultValue']
+        element: ElementsResponse = self.get_element(element_id)
+        default_value: dict = element._data_store['elements'][0]['defaultValue']
         default_value['value'] = value
         element.set_attribute('defaultValue', default_value)
         element_req = ElementsRequest([element])
