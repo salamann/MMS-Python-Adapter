@@ -4,7 +4,7 @@ import os
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-version = "2.0.0a1"
+version = "2.0.0a2"
 
 setup(
     name='mms-python-adapter',

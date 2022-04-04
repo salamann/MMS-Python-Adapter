@@ -36,8 +36,9 @@ class MMSAdapter(object):
 
     def update_element_value(self, element_id, value):
         # hardcoding this because the Element class doesn't commit properly
-        element: ElementsResponse = self.get_element(element_id)
-        default_value: dict = element._data_store['elements'][0]['defaultValue']
+        element: Element = self.get_element(
+            element_id)._data_store['elements'][0]
+        default_value: dict = element['defaultValue']
         default_value['value'] = value
         element.set_attribute('defaultValue', default_value)
         element_req = ElementsRequest([element])
