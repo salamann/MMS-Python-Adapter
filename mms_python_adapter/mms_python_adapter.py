@@ -45,3 +45,7 @@ class MMSAdapter(object):
                                                                 element_req)
 
         return element_respo
+
+
+if __name__ == "__main__":
+    pass
