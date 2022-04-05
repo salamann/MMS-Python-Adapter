@@ -31,15 +31,22 @@ class MMSAdapter(object):
         self.config.api_key.clear()
 
     # depth= -1 same as recurse=true
-    def get_element(self, element_id):
-        return self.elem_api.get_element(self.project_id, self.ref_id, element_id)
+    def get_element(self, element_id: str) -> Element:
+        return self.elem_api.get_element(self.project_id, self.ref_id, element_id)._data_store['elements'][0]
 
-    def update_element_value(self, element_id, value):
-        # hardcoding this because the Element class doesn't commit properly
-        element: Element = self.get_element(
-            element_id)._data_store['elements'][0]
+    def update_element_value(self, element_id, value) -> ElementsResponse:
+        element = self.get_element(element_id)
         default_value: dict = element['defaultValue']
         default_value['value'] = value
+        element.set_attribute('defaultValue', default_value)
+        element_req = ElementsRequest([element])
+        element_respo = self.elem_api.create_or_update_elements(self.project_id, self.ref_id,
+                                                                element_req)
+
+        return element_respo
+
+    def update_element_default_value(self, element_id: str, default_value: dict) -> ElementsResponse:
+        element = self.get_element(element_id)
         element.set_attribute('defaultValue', default_value)
         element_req = ElementsRequest([element])
         element_respo = self.elem_api.create_or_update_elements(self.project_id, self.ref_id,
