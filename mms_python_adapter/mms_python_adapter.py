@@ -1,5 +1,5 @@
 from mms_python_client import ApiClient, Configuration
-from mms_python_client.apis import AuthApi, ElementsApi
+from mms_python_client.apis import AuthApi, ElementsApi, ProjectsApi
 from mms_python_client.models import Element, ElementsRequest, ElementsResponse
 
 
@@ -29,6 +29,9 @@ class MMSAdapter(object):
 
     def logout(self):
         self.config.api_key.clear()
+
+    def get_project_ids(self):
+        return ProjectsApi(self.client).get_all_projects()
 
     # depth= -1 same as recurse=true
     def get_element(self, element_id: str) -> Element:
