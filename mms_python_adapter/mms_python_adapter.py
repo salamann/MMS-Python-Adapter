@@ -22,7 +22,8 @@ class MMSAdapter(object):
         self.client = ApiClient(self.config)
         auth_instance = AuthApi(self.client)
         self.token = auth_instance.get_authentication_token()
-        self.config = Configuration(access_token=self.token['token'])
+        self.config = Configuration(host=self.config.host,
+                                    access_token=self.token['token'])
         self.client = ApiClient(self.config)
 
         return "Logged in as " + username
